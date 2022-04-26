@@ -10,7 +10,7 @@ init();
 function init() {
     const welcomeText = logo({ name: "Employee Manager" }).render();
     console.log(welcomeText);
-    loadMainPrompts():
+    loadMainPrompts();
 };
 
 function loadMainPrompts () {
@@ -134,7 +134,7 @@ function viewEmployeesByDepartment() {
                 {
                     type: "list",
                     name: "departmentId",
-                    message: "Please select the department you would like to see employees for."
+                    message: "Please select the department you would like to see employees for.",
                     choices: departmentChoices
                 }
             ])
@@ -160,7 +160,7 @@ function viewEmployeesByManager() {
             {
                 type: "list",
                 name: "managerId",
-                message: "Please select the manager you want to see direct reports for."
+                message: "Please select the manager you want to see direct reports for.",
                 choices: managerChoices
             }
         ])
@@ -186,7 +186,7 @@ function removeEmployee () {
                 name: `${first_name}, ${last_name}`,
                 value: id
             })
-        });
+        );
         prompt([
             {
                 type: "list",
@@ -198,7 +198,7 @@ function removeEmployee () {
         .then(() => console.log("Employee removed from database."))
         .then(() => loadMainPrompts())
         ]);
-}
+},
 
 function updateEmployeeRole() {
     db.findAllEmployees()
@@ -212,7 +212,7 @@ function updateEmployeeRole() {
             {
                 type: "list",
                 name: "employeeId",
-                message: "Please choose the employee to update role."
+                message: "Please choose the employee to update role.",
                 choices: employeeChoices
             }
         ])
@@ -239,7 +239,7 @@ function updateEmployeeRole() {
                 });
         });
         })
-}
+},
 
 function updateEmployeeManager() {
     db.findAllEmployees()
@@ -253,7 +253,7 @@ function updateEmployeeManager() {
             {
                 type: "list",
                 name: "employeeId",
-                message: "Please select the employee to update their manager."
+                message: "Please select the employee to update their manager.",
                 choices: employeeChoices
             }
         ])
@@ -270,17 +270,17 @@ function updateEmployeeManager() {
                     {
                         type: "list",
                         name: "managerId",
-                        message: "Please select the manager to assign to the selected employee."
+                        message: "Please select the manager to assign to the selected employee.",
                         choice: managerChoices
                     }
                 ])
                 .then(res => db.updateEmployeeManager(employeeId, res.managerId))
                 .then(() => console.log("Employee manager updated."))
-                .then (() =? loadMainPrompts())
+                .then (() => loadMainPrompts())
                 })
         })
         });
-}
+},
 
 function viewRoles() {
     db.findAllRoles()
@@ -290,7 +290,7 @@ function viewRoles() {
             console.table(roles);
         })
         .then(() => loadMainPrompts());
-}
+},
 
 function addRole() {
     db.findAllDepartments()
@@ -322,7 +322,7 @@ function addRole() {
             .then(() => loadMainPrompts())
     })
     });
-}
+},
 
 function removeRole() {
     db.findAllRoles()
@@ -336,7 +336,7 @@ function removeRole() {
         {
             type: "list",
             name: "roleId",
-            message: "Please select the role you wish to remove."
+            message: "Please select the role you wish to remove.",
             choices: roleChoices
         }
     ])
@@ -344,7 +344,7 @@ function removeRole() {
     .then(() => console.log("Role removed from database."))
     .then((() => loadMainPrompts))
     });
-}
+},
 
 function viewDepartments() {
     db.findAllDepartments()
@@ -354,7 +354,7 @@ function viewDepartments() {
         console.table(departments);
     })
     .then(() => loadMainPrompts());
-}
+},
 
 function addDepartment() {
     prompt(
@@ -362,14 +362,14 @@ function addDepartment() {
             name: "name",
             message: "Please enter the name of the department to add."
         }
-    })
+    )
     .then(res => {
         let name = res;
         db.createDepartment(name)
             .then (() => console.log(`Department ${name.name} added to the database.`))
             .then (() => loadMainPrompts())
     });
-}
+},
 
 function removeDepartment() {
     db.findAllDepartments()
@@ -382,14 +382,14 @@ function removeDepartment() {
         prompt({
             type: "list",
             name: "departmentId",
-            message: "Please select the department you would like to remove."
+            message: "Please select the department you would like to remove.",
             choices: departmentChoices
         })
         .then(res => db.removeDepartment(res.departmentId))
         .then(() => console.log("Department removed from database."))
         .then(() => loadMainPrompts())
         });
-}
+},
 
 function addEmployee() {
     prompt([
@@ -416,7 +416,7 @@ function addEmployee() {
             prompt({
                 type: "list",
                 name: "roleId",
-                message: "Please enter employee's role."
+                message: "Please enter employee's role.",
                 choices: roleChoices
             })
             .then(res => {
@@ -432,7 +432,7 @@ function addEmployee() {
                     prompt({
                         type: "list",
                         name: "managerId",
-                        message: "Please select the employee's manager."
+                        message: "Please select the employee's manager.",
                         choices: managerChoices
                     })
                     .then(res => {
@@ -451,9 +451,9 @@ function addEmployee() {
             })
             })
     });
-}
+},
 
 function quit() {
-    console.log("Bye!");
+    console.log("Goodbye!");
     process.exit();
-}
+  }
