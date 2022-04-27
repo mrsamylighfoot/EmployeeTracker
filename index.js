@@ -106,8 +106,9 @@ function loadMainPrompts () {
             case "REMOVE_ROLE":
                 removeRole();
                 break;
-                default:
-                quit();   
+            case "QUIT":
+                quit();
+                break;   
         }
     })
 }
@@ -185,8 +186,8 @@ function removeEmployee () {
             const employeeChoices = employees.map(({ id, first_name, last_name }) => ({
                 name: `${first_name}, ${last_name}`,
                 value: id
-            })
-        );
+            }))
+        }),
         prompt([
             {
                 type: "list",
@@ -197,8 +198,8 @@ function removeEmployee () {
         .then(res => db.removeEmployee(res.employeeId))
         .then(() => console.log("Employee removed from database."))
         .then(() => loadMainPrompts())
-        ]);
-},
+        ])
+}
 
 function updateEmployeeRole() {
     db.findAllEmployees()
@@ -239,7 +240,7 @@ function updateEmployeeRole() {
                 });
         });
         })
-},
+}
 
 function updateEmployeeManager() {
     db.findAllEmployees()
@@ -280,7 +281,7 @@ function updateEmployeeManager() {
                 })
         })
         });
-},
+}
 
 function viewRoles() {
     db.findAllRoles()
@@ -290,7 +291,7 @@ function viewRoles() {
             console.table(roles);
         })
         .then(() => loadMainPrompts());
-},
+}
 
 function addRole() {
     db.findAllDepartments()
@@ -322,7 +323,7 @@ function addRole() {
             .then(() => loadMainPrompts())
     })
     });
-},
+}
 
 function removeRole() {
     db.findAllRoles()
@@ -344,7 +345,7 @@ function removeRole() {
     .then(() => console.log("Role removed from database."))
     .then((() => loadMainPrompts))
     });
-},
+}
 
 function viewDepartments() {
     db.findAllDepartments()
@@ -354,7 +355,7 @@ function viewDepartments() {
         console.table(departments);
     })
     .then(() => loadMainPrompts());
-},
+}
 
 function addDepartment() {
     prompt(
@@ -369,7 +370,7 @@ function addDepartment() {
             .then (() => console.log(`Department ${name.name} added to the database.`))
             .then (() => loadMainPrompts())
     });
-},
+}
 
 function removeDepartment() {
     db.findAllDepartments()
@@ -389,7 +390,7 @@ function removeDepartment() {
         .then(() => console.log("Department removed from database."))
         .then(() => loadMainPrompts())
         });
-},
+}
 
 function addEmployee() {
     prompt([
@@ -451,7 +452,7 @@ function addEmployee() {
             })
             })
     });
-},
+}
 
 function quit() {
     console.log("Goodbye!");
